@@ -166,7 +166,6 @@ public class ConnectionHandler extends Thread {
             }
         } catch (IOException e) {
             System.out.println("Error from file system reading");
-            e.printStackTrace();
             stopThis();
             return;
         }

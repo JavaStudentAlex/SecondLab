@@ -5,6 +5,7 @@ import TaskManagerServer.ModelClasses.Task;
 import TaskManagerServer.Server.ConnectionHandler;
 import TaskManagerServer.CommonClasses.*;
 import TaskManagerServer.Exceptions.SameTaskException;
+import org.apache.log4j.Logger;
 import org.xml.sax.SAXException;
 import javax.xml.parsers.ParserConfigurationException;
 import java.io.DataInputStream;
@@ -12,6 +13,9 @@ import java.io.DataOutputStream;
 import java.io.IOException;
 
 public class ChangeProcessor extends AbstractProcessor {
+
+    private static Logger logger = Logger.getLogger(ChangeProcessor.class);
+
     public ChangeProcessor(ConnectionHandler handler){
         super(handler);
         process= Protocol.CHANGE;
@@ -45,7 +49,7 @@ public class ChangeProcessor extends AbstractProcessor {
 
         } catch (SAXException | ParserConfigurationException e) {
             SocketWorker.writeTheErrorByWriter(writer,"Server XMl error");
-            e.printStackTrace();
+            logger.warn("Server XMl error");
             return;
         }
         catch (MyOwnException e){
