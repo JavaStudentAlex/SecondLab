@@ -1,5 +1,6 @@
 package TaskManagerServer.Server.XMLParsers;
 
+import org.apache.log4j.Logger;
 import org.xml.sax.Attributes;
 import org.xml.sax.SAXException;
 import org.xml.sax.helpers.DefaultHandler;
@@ -14,6 +15,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class UsersXMLParser extends DefaultHandler {
+    private static Logger logger = Logger.getLogger(UsersXMLParser.class);
     private static final String USERS_TAG_NAME = "users";
     private static final String USER_TAG_NAME = "user";
     private static final String PASSWORD_TAG_NAME = "password";
@@ -34,7 +36,7 @@ public class UsersXMLParser extends DefaultHandler {
             try {
                 SAXParserFactory.newInstance().newSAXParser().parse(usersFile,this);
             } catch (SAXException | ParserConfigurationException e) {
-                System.out.println("Error in xml parsing");
+                logger.warn("Error in xml parsing");
                 file.delete();
                 file.createNewFile();
                 return;
@@ -85,6 +87,7 @@ public class UsersXMLParser extends DefaultHandler {
         } catch (XMLStreamException e) {
             throw new IOException();
         } catch (FileNotFoundException e) {
+            logger.warn("File not found, create new");
             usersFile.delete();
             usersFile.createNewFile();
             return;

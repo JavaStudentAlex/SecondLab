@@ -4,6 +4,7 @@ import TaskManagerClientPart.Cheker;
 import TaskManagerClientPart.CommonClasses.TaskStringForm;
 import TaskManagerClientPart.CommonClasses.TasksXMLParser;
 import TaskManagerClientPart.MenuClasses.IView;
+import org.apache.log4j.Logger;
 import org.xml.sax.SAXException;
 import javax.xml.parsers.ParserConfigurationException;
 import java.io.IOException;
@@ -13,6 +14,7 @@ import java.util.List;
 import java.util.Map;
 
 public class TaskDataSource{
+    private static Logger logger = Logger.getLogger(TaskDataSource.class);
     private Map<String,TaskStringForm> tasks;
     private IView gui;
     private Cheker cheker;
@@ -31,6 +33,7 @@ public class TaskDataSource{
         try {
             stringTempTasks = new TasksXMLParser(xmlTasks).getStringFormTasks();
         } catch (SAXException | ParserConfigurationException | IOException e) {
+            logger.info("Error with loaded user tasks");
             gui.showErrorMessage("Error with loaded user tasks");
             return;
         }

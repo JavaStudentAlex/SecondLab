@@ -2,6 +2,8 @@ package TaskManagerServer.Server.Processors;
 
 import TaskManagerServer.Server.ConnectionHandler;
 import TaskManagerServer.CommonClasses.*;
+import org.apache.log4j.Logger;
+
 import javax.xml.stream.XMLOutputFactory;
 import javax.xml.stream.XMLStreamException;
 import javax.xml.stream.XMLStreamWriter;
@@ -11,6 +13,8 @@ import java.io.IOException;
 import java.io.StringWriter;
 
 public class LoginProcessor extends AbstractProcessor {
+
+    private static Logger logger = Logger.getLogger(LoginProcessor.class);
 
     public LoginProcessor(ConnectionHandler handler) {
         super(handler);
@@ -34,7 +38,7 @@ public class LoginProcessor extends AbstractProcessor {
             XMLStreamWriter stringWriter = XMLOutputFactory.newFactory().createXMLStreamWriter(outString);
             TasksXMLParser.writeTasksByXML(stringWriter,handler.getCurrentTasksStringList());
         } catch (XMLStreamException e) {
-            System.out.println("XML stream error");
+            logger.warn("XML stream error");
             writer.writeUTF("");
             writer.flush();
             return;

@@ -3,6 +3,7 @@ package TaskManagerClientPart.PresenterClasses.Cotrollers;
 import TaskManagerClientPart.CommonClasses.TasksXMLParser;
 import TaskManagerClientPart.MenuClasses.IView;
 import TaskManagerClientPart.PresenterClasses.WebClient;
+import org.apache.log4j.Logger;
 
 import javax.xml.stream.XMLOutputFactory;
 import javax.xml.stream.XMLStreamException;
@@ -15,6 +16,7 @@ import java.io.StringWriter;
  * The class, that control removing task by user.
  */
 public class DeleteController extends AbstractController{
+    private static Logger logger = Logger.getLogger(DeleteController.class);
 
     public DeleteController(IView gui, WebClient client){
         super(gui,client);
@@ -52,6 +54,7 @@ public class DeleteController extends AbstractController{
             XMLStreamWriter writer = XMLOutputFactory.newFactory().createXMLStreamWriter(outString);
             TasksXMLParser.writeOldTaskByXML(writer,deleted);
         } catch (XMLStreamException e) {
+            logger.warn("XML writing problems in deleting");
             gui.showErrorMessage("XML writing problems");
             return;
         }

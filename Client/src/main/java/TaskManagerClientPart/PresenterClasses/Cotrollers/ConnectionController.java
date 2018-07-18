@@ -3,6 +3,7 @@ package TaskManagerClientPart.PresenterClasses.Cotrollers;
 import TaskManagerClientPart.MenuClasses.IView;
 import TaskManagerClientPart.MenuClasses.ServerContent;
 import TaskManagerClientPart.PresenterClasses.WebClient;
+import org.apache.log4j.Logger;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -13,6 +14,7 @@ import java.net.UnknownHostException;
 import java.util.regex.Pattern;
 
 public class ConnectionController extends AbstractController {
+    private static Logger logger = Logger.getLogger(ConnectionController.class);
 
     private static final int MINPORT=1;
     private static final int MAXPORT=65535;
@@ -78,9 +80,11 @@ public class ConnectionController extends AbstractController {
             txtPort=tempPort;
             return result;
         } catch (UnknownHostException e) {
+            logger.info("Unknown IP address");
             gui.showErrorMessage("Unknown IP address");
             return null;
         }catch (IOException e){
+            logger.info("Server not found");
             gui.showErrorMessage("Server not found");
             return null;
         }
@@ -92,6 +96,7 @@ public class ConnectionController extends AbstractController {
             result = Integer.parseInt(port);
             return result;
         }catch (NumberFormatException e){
+            logger.info("Port not valid");
             gui.showErrorMessage("Port not valid");
             return 0;
         }

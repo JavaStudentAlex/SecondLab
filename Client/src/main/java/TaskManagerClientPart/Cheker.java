@@ -3,6 +3,8 @@ package TaskManagerClientPart;
 import TaskManagerClientPart.CommonClasses.TaskStringForm;
 import TaskManagerClientPart.Exceptions.*;
 import TaskManagerClientPart.MenuClasses.IView;
+import org.apache.log4j.Logger;
+
 import javax.swing.*;
 import java.util.Date;
 import java.util.HashMap;
@@ -12,6 +14,7 @@ import java.util.Map;
  * The class that manage task's happening control
  */
 public class Cheker{
+    private static Logger logger = Logger.getLogger(Cheker.class);
 
     /**
      * The class that control task's happening
@@ -96,7 +99,7 @@ public class Cheker{
         try {
             task = taskString.parseTask();
         } catch (MyOwnException e) {
-            System.out.println("After asserting on the server can not be");
+            logger.info("After asserting on the server can not be");
             deleteAll();
         }
         if(task.nextTimeAfter(new Date())==null){

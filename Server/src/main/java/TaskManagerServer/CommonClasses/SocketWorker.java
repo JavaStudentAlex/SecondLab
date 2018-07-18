@@ -1,12 +1,15 @@
 package TaskManagerServer.CommonClasses;
 
+import org.apache.log4j.Logger;
+
 import java.io.*;
 import java.net.Socket;
 
 /**
  * The class that is used by sockets of server/client
  */
-public class SocketWorker {
+public class SocketWorker {;
+    private static Logger logger = Logger.getLogger(SocketWorker.class);
 
     /**
      * The method return the writer for socket in argument
@@ -35,6 +38,7 @@ public class SocketWorker {
      * @throws IOException if the connection end
      */
     public static void writeTheErrorByWriter(DataOutputStream writer, String message) throws IOException{
+        logger.info(message);
         writer.writeBoolean(false);
         writer.writeUTF(message);
         writer.flush();

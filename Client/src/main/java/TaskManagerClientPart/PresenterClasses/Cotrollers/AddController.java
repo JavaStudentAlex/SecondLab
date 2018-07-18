@@ -4,6 +4,8 @@ import TaskManagerClientPart.CommonClasses.TaskStringForm;
 import TaskManagerClientPart.CommonClasses.TasksXMLParser;
 import TaskManagerClientPart.MenuClasses.IView;
 import TaskManagerClientPart.PresenterClasses.WebClient;
+import org.apache.log4j.Logger;
+
 import javax.xml.stream.XMLOutputFactory;
 import javax.xml.stream.XMLStreamException;
 import javax.xml.stream.XMLStreamWriter;
@@ -15,6 +17,7 @@ import java.io.StringWriter;
  *The element, that control adding a new task in the model repository
  */
 public class AddController extends AbstractController {
+    private static Logger logger = Logger.getLogger(AddController.class);
     public AddController(IView gui, WebClient client) {
         super(gui, client);
     }
@@ -36,6 +39,7 @@ public class AddController extends AbstractController {
             XMLStreamWriter writer = XMLOutputFactory.newFactory().createXMLStreamWriter(outString);
             TasksXMLParser.writeTaskByXML(writer,result);
         } catch (XMLStreamException e) {
+            logger.info("XML writing problems in adding");
             gui.showErrorMessage("XML writing problems");
             return;
         }

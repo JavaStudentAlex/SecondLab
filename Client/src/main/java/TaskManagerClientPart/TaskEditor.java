@@ -13,7 +13,6 @@ public class TaskEditor {
      * @param args - params of starting programm
      */
     public static void main(String[] args){
-        Presenter presenter;
-        presenter = new Presenter(new View());
+        Presenter presenter = new Presenter(new View());
     }
 }

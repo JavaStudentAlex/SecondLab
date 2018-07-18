@@ -7,6 +7,7 @@ import java.util.Date;
  * The class that keep info about the task
  */
 public class Task implements Cloneable, Comparable<Task>, Serializable{
+
     /**
      * The name
      */

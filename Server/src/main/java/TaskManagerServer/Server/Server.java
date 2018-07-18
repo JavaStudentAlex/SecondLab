@@ -5,8 +5,10 @@ import java.net.ServerSocket;
 import java.net.Socket;
 import java.util.*;
 import TaskManagerServer.Server.XMLParsers.UsersXMLParser;
+import org.apache.log4j.Logger;
 
 public class Server {
+    private static Logger logger = Logger.getLogger(Server.class);
     public static final String MAIN_DIR = "Server";
     public static final String USER_DIR = "Users";
     public static final String USER_FILE = "Tasks.xml";
@@ -29,14 +31,13 @@ public class Server {
             initUsers();
             assertUsersDirectories();
         } catch (IOException e) {
-            System.out.println("Can not write/read directories");
-            e.printStackTrace();
+            logger.warn("Can not write/read directories");
             return;
         }
 
         try {
             listener = new ServerSocket(2000);
-            System.out.println("Server start working at " + listener.getLocalSocketAddress());
+            logger.info("Server start working at " + listener.getLocalSocketAddress());
             while (true) {
                 Socket socket = listener.accept();
                 ConnectionHandler handler = pool.remove();
@@ -47,7 +48,7 @@ public class Server {
                 inUse.add(handler);
             }
         } catch (IOException e) {
-            System.out.println("Can't run on those port");
+            logger.warn("Can't run on those port");
         }
     }
 
@@ -111,7 +112,6 @@ public class Server {
 
             File userTasksTemp = new File(temp,USER_FILE);
             if(!userTasksTemp.exists()){
-                System.out.println("File not found : " + userTasksTemp.getAbsolutePath());
                 userTasksTemp.createNewFile();
             }
         }

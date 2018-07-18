@@ -4,6 +4,7 @@ import TaskManagerServer.Exceptions.MyOwnException;
 import TaskManagerServer.ModelClasses.Task;
 import TaskManagerServer.CommonClasses.*;
 import TaskManagerServer.Server.Processors.*;
+import org.apache.log4j.Logger;
 import org.xml.sax.SAXException;
 import javax.xml.parsers.ParserConfigurationException;
 import javax.xml.stream.XMLOutputFactory;
@@ -19,6 +20,7 @@ import java.util.List;
 import java.util.Map;
 
 public class ConnectionHandler extends Thread {
+    private static Logger logger = Logger.getLogger(ConnectionHandler.class);
     private Server server;
     private Socket connection;
     private List<AbstractProcessor> processors;
@@ -47,7 +49,7 @@ public class ConnectionHandler extends Thread {
             process(reader,writer);
             stopThis();
         }catch (IOException e) {
-            System.out.println("Error in server work");
+            logger.warn("Error in server work");
             stopThis();
             return;
         }
@@ -79,7 +81,9 @@ public class ConnectionHandler extends Thread {
             if (connection!=null){
                 connection.close();
             }
-        } catch (IOException e) {}
+        } catch (IOException e) {
+            logger.info("Could not close connection by stopping");
+        }
         this.interrupt();
     }
 
@@ -178,7 +182,7 @@ public class ConnectionHandler extends Thread {
         try {
             stringTasks = new TasksXMLParser(tasksStringXML).getStringFormTasks();
         } catch (SAXException | ParserConfigurationException | IOException e) {
-            System.out.println("Error in user tasks parsing");
+            logger.warn("Error in user tasks parsing");
             return;
         }
 
@@ -187,6 +191,7 @@ public class ConnectionHandler extends Thread {
                 Task temp = stringTask.parseTask();
                 tasks.put(temp.getTitle(),temp);
             } catch (MyOwnException e) {
+                logger.info("Beaten task from file");
                 continue;
             }
         }
@@ -225,7 +230,7 @@ public class ConnectionHandler extends Thread {
                     createXMLStreamWriter(new FileOutputStream(currentDir+File.separator+Server.USER_FILE));
             TasksXMLParser.writeTasksByXML(writer,tasksStringList);
         } catch (XMLStreamException | FileNotFoundException e) {
-            System.out.println("Should not be because directories asserted");
+            logger.info("Should not be because directories asserted");
         }
     }
 

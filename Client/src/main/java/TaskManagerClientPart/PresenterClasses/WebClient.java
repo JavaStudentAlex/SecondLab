@@ -6,11 +6,14 @@ import TaskManagerClientPart.MenuClasses.IView;
 import TaskManagerClientPart.MenuClasses.ServerContent;
 import TaskManagerClientPart.CommonClasses.SocketWorker;
 import TaskManagerClientPart.CommonClasses.TaskStringForm;
+import org.apache.log4j.Logger;
 
 import java.io.*;
 import java.net.Socket;
 
 public class WebClient {
+
+    private static Logger logger = Logger.getLogger(WebClient.class);
 
     private IView gui;
 
@@ -38,7 +41,8 @@ public class WebClient {
             in = SocketWorker.getReader(connection);
             out = SocketWorker.getWriter(connection);
             gui.setState(messageState);
-        } catch (IOException e) {
+        } catch(IOException e) {
+            logger.warn("Error in server connection");
             gui.showErrorMessage("Error server connection");
             setNULLServer();
         }
@@ -63,6 +67,7 @@ public class WebClient {
             connection.close();
             setNULLServer();
         }catch (IOException e){
+            logger.warn("Failed connection");
             setAllNULL();
         }
     }
@@ -95,6 +100,7 @@ public class WebClient {
             taskSource.initTasks();
             taskSource.initCheker();
         }catch (IOException e){
+            logger.warn("Failed connection thrue the registering");
             connectionFailed();
             return;
         }
@@ -145,6 +151,7 @@ public class WebClient {
             }
             closeAccount();
         } catch (IOException e) {
+            logger.warn("Failed connection with the logging out");
             connectionFailed();
             return;
         }
@@ -174,6 +181,7 @@ public class WebClient {
             }
             taskSource.tasksSaveAndSet(xmlAllTasks);
         }catch (IOException e){
+            logger.warn("Failed connection with the logging in");
             connectionFailed();
             return;
         }
@@ -196,6 +204,7 @@ public class WebClient {
                 return false;
             }
         } catch (IOException e) {
+            logger.warn("Failed connection with adding new task");
             connectionFailed();
             return false;
         }
@@ -222,7 +231,7 @@ public class WebClient {
             String result = in.readUTF();
             return result;
         } catch (IOException e) {
-            System.out.println("Error in connection");
+            logger.warn("Error in connection by loading tasks");
             connectionFailed();
             return null;
         }
@@ -245,6 +254,7 @@ public class WebClient {
             taskSource.removeTaskByTitle(originalTitle);
             return true;
         } catch (IOException e) {
+            logger.warn("Failed connection by removing tasks");
             connectionFailed();
             return false;
         }
@@ -267,6 +277,7 @@ public class WebClient {
             taskSource.changeTaskByTitle(oldOriginalTitle,newOriginalTask);
             return true;
         } catch (IOException e) {
+            logger.warn("Failed connection by changing task");
             connectionFailed();
             return false;
         }
