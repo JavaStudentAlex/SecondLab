@@ -1,4 +1,4 @@
-package TaskManagerClientPart.Exceptions;
+package Exceptions;
 
 public class ParseDateException extends Exception {
 

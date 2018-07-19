@@ -1,8 +1,7 @@
-package TaskManagerClientPart.CommonClasses;
+package CommonClasses;
 
 
-import TaskManagerClientPart.Exceptions.*;
-import TaskManagerClientPart.Task;
+import Exceptions.*;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;

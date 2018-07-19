@@ -6,7 +6,7 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.List;
-import TaskManagerClientPart.CommonClasses.TaskStringForm;
+import CommonClasses.TaskStringForm;
 
 /**
  * The class that keep together all elements for working with tasks and it's info

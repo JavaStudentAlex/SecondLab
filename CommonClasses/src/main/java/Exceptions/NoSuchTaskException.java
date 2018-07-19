@@ -1,4 +1,4 @@
-package TaskManagerServer.Exceptions;
+package Exceptions;
 
 /**
  * The special exception with mining, that container din not find exception, you want to see on some position.

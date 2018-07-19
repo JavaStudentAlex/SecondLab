@@ -1,4 +1,4 @@
-package TaskManagerServer.ModelClasses;
+package CommonClasses;
 
 import java.io.*;
 import java.util.Date;

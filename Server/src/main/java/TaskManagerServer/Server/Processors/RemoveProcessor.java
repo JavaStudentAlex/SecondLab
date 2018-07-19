@@ -1,7 +1,7 @@
 package TaskManagerServer.Server.Processors;
 
 import TaskManagerServer.Server.ConnectionHandler;
-import TaskManagerServer.CommonClasses.*;
+import CommonClasses.*;
 import org.xml.sax.SAXException;
 
 import javax.xml.parsers.ParserConfigurationException;

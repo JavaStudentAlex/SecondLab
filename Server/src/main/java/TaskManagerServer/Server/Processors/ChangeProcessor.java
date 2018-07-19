@@ -1,10 +1,8 @@
 package TaskManagerServer.Server.Processors;
 
-import TaskManagerServer.Exceptions.MyOwnException;
-import TaskManagerServer.ModelClasses.Task;
+import Exceptions.*;
 import TaskManagerServer.Server.ConnectionHandler;
-import TaskManagerServer.CommonClasses.*;
-import TaskManagerServer.Exceptions.SameTaskException;
+import CommonClasses.*;
 import org.apache.log4j.Logger;
 import org.xml.sax.SAXException;
 import javax.xml.parsers.ParserConfigurationException;

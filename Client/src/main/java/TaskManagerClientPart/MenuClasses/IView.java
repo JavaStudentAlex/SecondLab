@@ -1,6 +1,6 @@
 package TaskManagerClientPart.MenuClasses;
 
-import TaskManagerClientPart.CommonClasses.TaskStringForm;
+import CommonClasses.TaskStringForm;
 import javax.swing.event.ListSelectionListener;
 import java.awt.event.ActionListener;
 import java.awt.event.WindowAdapter;

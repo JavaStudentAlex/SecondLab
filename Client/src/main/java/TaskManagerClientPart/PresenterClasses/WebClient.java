@@ -1,11 +1,11 @@
 package TaskManagerClientPart.PresenterClasses;
 
-import TaskManagerClientPart.CommonClasses.Protocol;
+import CommonClasses.Protocol;
 import TaskManagerClientPart.MenuClasses.AccountContent;
 import TaskManagerClientPart.MenuClasses.IView;
 import TaskManagerClientPart.MenuClasses.ServerContent;
-import TaskManagerClientPart.CommonClasses.SocketWorker;
-import TaskManagerClientPart.CommonClasses.TaskStringForm;
+import CommonClasses.SocketWorker;
+import CommonClasses.TaskStringForm;
 import org.apache.log4j.Logger;
 
 import java.io.*;

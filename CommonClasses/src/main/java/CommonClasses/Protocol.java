@@ -1,4 +1,4 @@
-package TaskManagerClientPart.CommonClasses;
+package CommonClasses;
 
 /**
  * The class that keep the basic constant commands of messaging by socket

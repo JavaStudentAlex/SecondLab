@@ -1,6 +1,6 @@
 package TaskManagerClientPart.MenuClasses;
 
-import TaskManagerClientPart.CommonClasses.TaskStringForm;
+import CommonClasses.TaskStringForm;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;

@@ -1,7 +1,7 @@
 package TaskManagerServer.ModelClasses;
 
 import org.apache.log4j.Logger;
-
+import CommonClasses.Task;
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.io.IOException;

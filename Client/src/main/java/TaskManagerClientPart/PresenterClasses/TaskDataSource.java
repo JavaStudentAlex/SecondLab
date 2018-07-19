@@ -1,8 +1,8 @@
 package TaskManagerClientPart.PresenterClasses;
 
 import TaskManagerClientPart.Cheker;
-import TaskManagerClientPart.CommonClasses.TaskStringForm;
-import TaskManagerClientPart.CommonClasses.TasksXMLParser;
+import CommonClasses.TaskStringForm;
+import CommonClasses.TasksXMLParser;
 import TaskManagerClientPart.MenuClasses.IView;
 import org.apache.log4j.Logger;
 import org.xml.sax.SAXException;

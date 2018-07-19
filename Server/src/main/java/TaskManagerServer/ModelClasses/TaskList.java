@@ -1,7 +1,9 @@
 package TaskManagerServer.ModelClasses;
 
 import java.io.Serializable;
-import java.util.*;
+import java.util.Iterator;
+
+import CommonClasses.Task;
 
 /**
  * The abstract class of collection for {@code Task}
@@ -47,7 +49,7 @@ public abstract class TaskList implements Iterable<Task>,Cloneable, Serializable
     /**
      * Abstract iterator class for abstract collection
      */
-    protected abstract class TaskListIterator implements Iterator<Task>{
+    protected abstract class TaskListIterator implements Iterator<Task> {
 
         /**
          * The local change counter

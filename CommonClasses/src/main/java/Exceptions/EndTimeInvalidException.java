@@ -1,4 +1,4 @@
-package TaskManagerClientPart.Exceptions;
+package Exceptions;
 
 /**
  * The special exception with mining, that user have done invalid input into end time field.

@@ -1,4 +1,4 @@
-package TaskManagerServer.CommonClasses;
+package CommonClasses;
 
 import org.xml.sax.Attributes;
 import org.xml.sax.InputSource;

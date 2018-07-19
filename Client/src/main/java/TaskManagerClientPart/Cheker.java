@@ -1,14 +1,14 @@
 package TaskManagerClientPart;
 
-import TaskManagerClientPart.CommonClasses.TaskStringForm;
-import TaskManagerClientPart.Exceptions.*;
+import CommonClasses.TaskStringForm;
+import Exceptions.*;
 import TaskManagerClientPart.MenuClasses.IView;
 import org.apache.log4j.Logger;
-
 import javax.swing.*;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
+import CommonClasses.Task;
 
 /**
  * The class that manage task's happening control

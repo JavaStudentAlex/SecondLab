@@ -1,7 +1,7 @@
 package TaskManagerServer.Server.Processors;
 
 import TaskManagerServer.Server.ConnectionHandler;
-import TaskManagerServer.CommonClasses.*;
+import CommonClasses.*;
 import org.apache.log4j.Logger;
 
 import javax.xml.stream.XMLOutputFactory;

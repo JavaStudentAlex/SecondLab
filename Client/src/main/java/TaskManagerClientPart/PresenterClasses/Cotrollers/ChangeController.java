@@ -1,7 +1,7 @@
 package TaskManagerClientPart.PresenterClasses.Cotrollers;
 
-import TaskManagerClientPart.CommonClasses.TaskStringForm;
-import TaskManagerClientPart.CommonClasses.TasksXMLParser;
+import CommonClasses.TaskStringForm;
+import CommonClasses.TasksXMLParser;
 import TaskManagerClientPart.MenuClasses.IView;
 import TaskManagerClientPart.PresenterClasses.WebClient;
 import org.apache.log4j.Logger;

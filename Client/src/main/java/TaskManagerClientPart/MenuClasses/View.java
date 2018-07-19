@@ -7,7 +7,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.WindowAdapter;
 import java.util.List;
-import TaskManagerClientPart.CommonClasses.TaskStringForm;
+import CommonClasses.TaskStringForm;
 
 /**
  * The main container class for user interface

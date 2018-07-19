@@ -1,7 +1,7 @@
 package TaskManagerServer.Server.Processors;
 
 import TaskManagerServer.Server.ConnectionHandler;
-import TaskManagerServer.CommonClasses.*;
+import CommonClasses.*;
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
 

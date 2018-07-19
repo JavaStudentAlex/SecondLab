@@ -2,7 +2,7 @@ package TaskManagerClientPart.MenuClasses;
 
 import javax.swing.*;
 import java.awt.*;
-import TaskManagerClientPart.CommonClasses.TaskStringForm;
+import CommonClasses.TaskStringForm;
 
 /**
  * The class for control time info

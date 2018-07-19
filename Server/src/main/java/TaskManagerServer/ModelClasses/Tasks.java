@@ -1,6 +1,7 @@
 package TaskManagerServer.ModelClasses;
 
 
+import CommonClasses.Task;
 import org.apache.log4j.Logger;
 import java.util.*;
 
