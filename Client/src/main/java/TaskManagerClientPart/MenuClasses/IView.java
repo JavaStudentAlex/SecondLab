@@ -15,89 +15,89 @@ public interface IView {
      * The method that returns the string with new task
      * @return the string
      */
-    public TaskStringForm getNewTask();
+    TaskStringForm getNewTask();
 
     /**
      * The method that renews tasks view for user
      * @param tasks - new tasks in string format
      */
-    public void renewTasks(List<String> tasks);
+    void renewTasks(List<String> tasks);
 
     /**
      * The method sets handler for choosing task action
      * @param listener - the handler
      */
-    public void setSelectionListener(ListSelectionListener listener);
+    void setSelectionListener(ListSelectionListener listener);
 
     /**
      * Sets task info into the relevant fields
      * @param task - the task in string format
      */
-    public void setTaskToFields(TaskStringForm task);
+    void setTaskToFields(TaskStringForm task);
 
     /**
      * The method shows to user the error message with text {@code message}
      * @param message - the text message for user
      */
-    public void showErrorMessage(String message);
+    void showErrorMessage(String message);
 
     /**
      * The method clears the fields and transform it to the primary format
      */
-    public void clearAllTasks();
+    void clearAllTasks();
 
     /**
      * The method sets handler of window_closing action
      * @param adapter - the handler
      */
-    public void setWindowCLosing(WindowAdapter adapter);
+    void setWindowCLosing(WindowAdapter adapter);
 
     /**
      * The method that returns the task, selected by user
      * @return the string title of relevant task
      */
-    public String getSelectedTask();
+    String getSelectedTask();
 
     /**
      * The method sets handler of adding new task
      * @param listener - the handler
      */
-    public void setAddListener(ActionListener listener);
+    void setAddListener(ActionListener listener);
 
     /**
      * The method sets handler of changing new task
      * @param listener- the handler
      */
-    public void setChangeListener(ActionListener listener);
+    void setChangeListener(ActionListener listener);
 
     /**
      * The method sets handler of removing new task
      * @param listener - the handler
      */
-    public void setDeleteListener(ActionListener listener);
+    void setDeleteListener(ActionListener listener);
 
-    public String getServerAddress();
+    String getServerAddress();
 
-    public void clearServer();
+    void clearServer();
 
-    public String getPort();
+    String getPort();
 
-    public void setState(String message);
+    void setState(String message);
 
-    public String getUserName();
+    String getUserName();
 
-    public String getPass();
+    String getPass();
 
-    public void clearAccount();
+    void clearAccount();
 
-    public void setAccountState(String message);
+    void setAccountState(String message);
 
-    public void setAccountButtonListener(ActionListener listener, String buttonName);
+    void setAccountButtonListener(ActionListener listener, String buttonName);
 
-    public void setServerButtonListener(ActionListener listener, String buttonName);
+    void setServerButtonListener(ActionListener listener, String buttonName);
 
-    public void clearTaskFields();
+    void clearTaskFields();
 
-    public void showInformMessage(String message);
+    void showInformMessage(String message);
 
 }
