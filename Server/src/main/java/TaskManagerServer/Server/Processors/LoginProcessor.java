@@ -36,6 +36,7 @@ public class LoginProcessor extends AbstractProcessor {
         StringWriter outString=new StringWriter();
         try {
             XMLStreamWriter stringWriter = XMLOutputFactory.newFactory().createXMLStreamWriter(outString);
+
             TasksXMLParser.writeTasksByXML(stringWriter,handler.getCurrentTasksStringList());
         } catch (XMLStreamException e) {
             logger.warn("XML stream error");

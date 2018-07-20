@@ -66,17 +66,6 @@ public class Task implements Cloneable, Comparable<Task>, Serializable{
         }
 
         /**
-         * Constructor of copies
-         * @param temp - copy of {@code TimeControll}
-         */
-        TimeControll(TimeControll temp){
-            repeat = temp.repeat;
-            interval = temp.interval;
-            startTime = (Date)temp.startTime.clone();
-            endTime = (Date)temp.endTime.clone();
-        }
-
-        /**
          * Method assert equaling {@code o} to current object
          * @param o - the check object
          * @return true if equal, if one of all conditions does not occur - false
@@ -121,19 +110,6 @@ public class Task implements Cloneable, Comparable<Task>, Serializable{
                     endTime.toString() + "  interval : " + interval +" ms":"   time : " + startTime.toString());
             return result;
         }
-    }
-
-
-    /**
-     * Constructor for any task
-     * @param title - the name
-     * @param active - is active
-     * @param controller - control time object
-     */
-    private Task(String title,boolean active, TimeControll controller ){
-        this.title = title;
-        this.active = active;
-        this.controller = new TimeControll(controller);
     }
 
     /**
@@ -197,24 +173,6 @@ public class Task implements Cloneable, Comparable<Task>, Serializable{
     public Date getTime() {
 
         return (Date) controller.startTime.clone();
-    }
-
-    /**
-     * The method set start time in single task
-     * @param time - the setting time
-     */
-    public void setTime(Date time){
-        controller=new TimeControll(time);
-    }
-
-    /**
-     * The method set start, end and interval in multiple task
-     * @param start - value for startTime field
-     * @param end - value for endTime field
-     * @param interval - value for interval field
-     */
-    public void setTime(Date start, Date end, int interval){
-        controller = new TimeControll(start,end,interval);
     }
 
     /**
@@ -318,28 +276,6 @@ public class Task implements Cloneable, Comparable<Task>, Serializable{
         result = 31 * result + (active ? 1 : 0);
         result = 31 * result + controller.hashCode();
         return result;
-    }
-
-    /**
-     * The method clone the current task and return it
-     * @return the new {@code Task} instance with old attributes
-     */
-    @Override
-    public Task clone(){
-        try {
-            Task result = (Task) super.clone();
-            if(!isRepeated()){
-                result.controller = new TimeControll(controller.startTime);
-            }
-            else{
-                result.controller = new TimeControll(controller.startTime,controller.endTime,(int)controller.interval/1000);
-            }
-            result.controller.repeat = controller.repeat;
-            return result;
-        }
-        catch (CloneNotSupportedException e){
-            throw new RuntimeException("Error in cloning Task");
-        }
     }
 
     /**

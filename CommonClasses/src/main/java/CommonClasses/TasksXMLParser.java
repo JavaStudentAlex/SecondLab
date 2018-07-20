@@ -29,7 +29,6 @@ public class TasksXMLParser extends DefaultHandler {
     private List<TaskStringForm> tasks;
     private boolean groupTask;
     private String curTag;
-    private boolean isOldTask;
 
     public TasksXMLParser(String sourceXML) throws SAXException, ParserConfigurationException,IOException{
         this.sourceXML = sourceXML;
