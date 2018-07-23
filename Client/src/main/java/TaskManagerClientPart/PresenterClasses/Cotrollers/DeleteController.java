@@ -16,12 +16,24 @@ import java.io.StringWriter;
  * The class, that control removing task by user.
  */
 public class DeleteController extends AbstractController{
+
+    /**
+     * The logger of the class.
+     */
     private static Logger logger = Logger.getLogger(DeleteController.class);
 
+    /**
+     * The constructor delegate object`s creating to parent class.
+     * @param gui the UI.
+     * @param client the web part.
+     */
     public DeleteController(IView gui, WebClient client){
         super(gui,client);
     }
 
+    /**
+     * The method add handler for remove in UI.
+     */
     @Override
     protected void init() {
         gui.setDeleteListener(new DeleteListener());
@@ -32,8 +44,8 @@ public class DeleteController extends AbstractController{
      */
     private class DeleteListener implements ActionListener { // for buttons
         /**
-         * The method that handle the event
-         * @param e The object of event
+         * The method that handle the event.
+         * @param e The object of event.
          * @see DeleteController#deleting()
          */
         @Override
@@ -42,6 +54,10 @@ public class DeleteController extends AbstractController{
         }
     }
 
+    /**
+     * The method get the name of deleted task, send it to server and wait for the answer. If successful - clear the
+     * fields in UI, if no - show the error message.
+     */
     private void deleting(){
         String deleted = gui.getSelectedTask();
         if (deleted==null){

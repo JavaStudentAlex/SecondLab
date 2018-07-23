@@ -14,20 +14,36 @@ import java.awt.event.ActionListener;
 import java.io.StringWriter;
 
 /**
- *The element, that control adding a new task in the model repository
+ *The element, that control adding a new task in the model repository.
  */
 public class AddController extends AbstractController {
+    /**
+     * The logger of the class.
+     */
     private static Logger logger = Logger.getLogger(AddController.class);
+
+    /**
+     * The method that delegate creating the object to it`s parent class.
+     * @param gui the UI
+     * @param client the web part
+     */
     public AddController(IView gui, WebClient client) {
         super(gui, client);
     }
 
+    /**
+     * The method set add handler to user interface.
+     */
     @Override
     protected void init() {
         gui.setAddListener(new AddListener());
     }
 
 
+    /**
+     * The main method that get new task from the user interface, send it to the server, wait for the answer and if all
+     * is all right clear the fields on UI, if not - send a message with the error.
+     */
     private void adding(){
         TaskStringForm result = gui.getNewTask();
         if(result==null){
@@ -55,8 +71,8 @@ public class AddController extends AbstractController {
     private class AddListener implements ActionListener {
 
         /**
-         * The method that handle the event
-         * @param e The object of event
+         * The method that handle the event.
+         * @param e The object of event.
          * @see AddController#adding()
          */
         @Override

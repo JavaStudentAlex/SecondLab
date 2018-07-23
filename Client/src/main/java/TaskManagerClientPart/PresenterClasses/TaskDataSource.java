@@ -13,20 +13,50 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+/**
+ * The class that represent the data base of the tasks.
+ */
 public class TaskDataSource{
+
+    /**
+     * The logger of the class.
+     */
     private static Logger logger = Logger.getLogger(TaskDataSource.class);
+
+    /**
+     * The map that save the tasks by it`s name.
+     */
     private Map<String,TaskStringForm> tasks;
+
+    /**
+     * The UI.
+     */
     private IView gui;
+
+    /**
+     * The checker when the active tasks happen.
+     */
     private Cheker cheker;
 
+    /**
+     * The constructor that get as argument the UI.
+     * @param gui the UI.
+     */
     public TaskDataSource(IView gui) {
         this.gui=gui;
     }
 
+    /**
+     * Creating the map for saving tasks.
+     */
     public void initTasks(){
         tasks=new HashMap<>();
     }
 
+    /**
+     * The method get the xml tasks info, parse it and save to map.
+     * @param xmlTasks
+     */
     public void tasksSaveAndSet(String xmlTasks){
         initTasks();
         List<TaskStringForm> stringTempTasks;
@@ -46,6 +76,9 @@ public class TaskDataSource{
         initCheker();
     }
 
+    /**
+     * The method create the checker and add all active tasks in.
+     */
     public void initCheker(){
         cheker = new Cheker(gui);
         for (Map.Entry<String,TaskStringForm> tasksEntry : tasks.entrySet()){
@@ -56,6 +89,9 @@ public class TaskDataSource{
         }
     }
 
+    /**
+     * The method get titles of all tasks and set it to UI.
+     */
     public void setTasksTitles(){
         List<String> result = new ArrayList<>();
         for(Map.Entry<String,TaskStringForm> temp : tasks.entrySet()){
@@ -65,6 +101,10 @@ public class TaskDataSource{
         gui.renewTasks(result);
     }
 
+    /**
+     * The method add the new task to data source.
+     * @param task the task in string form.
+     */
     public void addNewTask(TaskStringForm task){
         tasks.put(task.getTitle(),task);
         setTasksTitles();
@@ -73,6 +113,10 @@ public class TaskDataSource{
         }
     }
 
+    /**
+     * The method set the detail info about the task with the title like the argument.
+     * @param task the title of chosen task.
+     */
     public void setTaskToUserByName(String task){
         if (!tasks.containsKey(task)){
             return;
@@ -81,6 +125,10 @@ public class TaskDataSource{
         gui.setTaskToFields(temp);
     }
 
+    /**
+     * The method remove from the data source the task with the title like in the argument.
+     * @param title the title of the chosen task.
+     */
     public void removeTaskByTitle(String title){
         if (!tasks.containsKey(title)){
             return;
@@ -90,6 +138,11 @@ public class TaskDataSource{
         cheker.deleteTask(title);
     }
 
+    /**
+     * The method remove the task with the title like in oldTaskTitle argument and add new task like newTask argument.
+     * @param oldTaskTitle the title of old task.
+     * @param newTask the string form of the new task.
+     */
     public void changeTaskByTitle(String oldTaskTitle,TaskStringForm newTask){
         if (!tasks.containsKey(oldTaskTitle)){
             return;
@@ -104,6 +157,9 @@ public class TaskDataSource{
         }
     }
 
+    /**
+     * The method remove all tasks from data source and checker and set it double null.
+     */
     public void removeAllTasks(){
         if(cheker!=null){
             cheker.deleteAll();

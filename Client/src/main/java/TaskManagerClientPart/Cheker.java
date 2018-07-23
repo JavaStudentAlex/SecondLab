@@ -79,11 +79,6 @@ public class Cheker{
     HashMap<String,TaskChekThread> threads;
 
     /**
-     * The user panel for messages pushing
-     */
-    private JPanel root;
-
-    /**
      * The manager constructor that create main container
      */
     public Cheker(IView gui){

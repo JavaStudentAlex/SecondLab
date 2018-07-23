@@ -13,25 +13,53 @@ import java.net.Socket;
 import java.net.UnknownHostException;
 import java.util.regex.Pattern;
 
+/**
+ * The class that control connection to server.
+ */
 public class ConnectionController extends AbstractController {
+    /**
+     * The logger of this class.
+     */
     private static Logger logger = Logger.getLogger(ConnectionController.class);
 
-    private static final int MINPORT=1;
-    private static final int MAXPORT=65535;
-    private static final String oktatPattern = "(\\d|[1-9]\\d|1\\d\\d|2[0-4]\\d|25[0-5])";
-    private static final String ipv4Pattern = new StringBuilder("^").append("(").append(oktatPattern).append("\\.")
-            .append(")").append("{3}").append(oktatPattern).append("$").toString();
-    private String txtAddress;
-    private String txtPort;
+    /**
+     * The port max and min scopes.
+     */
+    private static final int MINPORT=1,MAXPORT=65535;
 
+    /**
+     * The patterns for IP validation.
+     */
+    private static final String oktatPattern = "(\\d|[1-9]\\d|1\\d\\d|2[0-4]\\d|25[0-5])",
+            ipv4Pattern = new StringBuilder("^").append("(").append(oktatPattern).append("\\.")
+            .append(")").append("{3}").append(oktatPattern).append("$").toString();
+
+    /**
+     * The value of current connection.
+     */
+    private String txtAddress,txtPort;
+
+    /**
+     * The method add the connection handler to UI.
+     */
     @Override
     protected void init() {
         gui.setServerButtonListener(new ConnectionHandler(), ServerContent.CONNECTNAME);
     }
 
+    /**
+     * The constructor delegate object`s creating to parent class.
+     * @param gui the UI.
+     * @param client the web part.
+     */
     public ConnectionController(IView gui, WebClient client){
         super(gui,client);
     }
+
+    /**
+     * The method try to get connection with address and port in fields and if successful - set the info state, if no -
+     * send the error message to UI.
+     */
     private void connect(){
         Socket connection = getConnection();
         if(connection==null){
@@ -42,6 +70,11 @@ public class ConnectionController extends AbstractController {
         gui.clearServer();
     }
 
+    /**
+     * The method validate the values of the IP and port. If it is valid - create the socket connection, if no - return
+     * null and send error message to UI.
+     * @return
+     */
     private Socket getConnection(){
         String tempAddress = gui.getServerAddress().trim();
         String tempPort = gui.getPort().trim();
@@ -90,6 +123,11 @@ public class ConnectionController extends AbstractController {
         }
     }
 
+    /**
+     * The method parse the port value from string to integer.
+     * @param port the port string value.
+     * @return the port number or 0 if port not valid.
+     */
     private int parsePort(String port){
         int result;
         try{
@@ -102,7 +140,15 @@ public class ConnectionController extends AbstractController {
         }
     }
 
+    /**
+     * The handler class for the connection activity.
+     */
     private class ConnectionHandler implements ActionListener{
+        /**
+         * The method that catch the activity and delegate work to connect() method.
+         * @param e the event class.
+         * @see ConnectionController#connect()
+         */
         @Override
         public void actionPerformed(ActionEvent e) {
             connect();

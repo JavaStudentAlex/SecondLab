@@ -5,24 +5,62 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+/**
+ * The child class of AbstractContent for showing the account info
+ */
 public class AccountContent extends AbstractContent {
+
+    /**
+     * The max length of the name.
+     */
     public static final int MAXNAME=64;
+
+    /**
+     * The max length of password.
+     */
     public static final int MAXPASS=32;
-    public static final String REGISTERNAME="Register";
-    public static final String LOGOUTNAME="Logout";
-    public static final String LOGINNAME="Login";
-    public static final String UNMASK="Unmask";
-    public static final String EMPTYSTRING="";
-    public static final String NOTLOGGED="Not logged";
+
+    /**
+     * The name of the buttons.
+     */
+    public static final String REGISTERNAME="Register",LOGOUTNAME="Logout",LOGINNAME="Login",UNMASK="Unmask";
+
+    /**
+     * The accounting statuses.
+     */
+    public static final String EMPTYSTRING="",NOTLOGGED="Not logged";
+
+    /**
+     * The filed for username.
+     */
     private JTextField nameField;
+
+    /**
+     * The field for password.
+     */
     private JPasswordField passwordField;
+
+    /**
+     * The buttons.
+     */
     private JButton login, logout, register, clear, unmask;
+
+    /**
+     * Th field for account statuses.
+     */
     private JLabel state;
 
+    /**
+     * The default constructor of the class.
+     */
     public AccountContent(){
         super();
     }
 
+
+    /**
+     * The method overrides the behaviour of init local elements.
+     */
     @Override
     protected void initElems() {
         rootPanel = PanelFactory.createPanel("Account");
@@ -32,6 +70,11 @@ public class AccountContent extends AbstractContent {
         placeButtons();
     }
 
+
+    /**
+     * The  method place the labels on the main panel.
+     * @see AbstractContent
+     */
     private void placeLabels(){
         state = new JLabel(NOTLOGGED);
         GridBagConstraints locator = Constrains.getLocator();
@@ -62,6 +105,9 @@ public class AccountContent extends AbstractContent {
         rootPanel.add(new JLabel("MAX PASS : " + MAXPASS),locator);
     }
 
+    /**
+     * The  method place the text fields on the main panel.
+     */
     private void placeFields(){
         nameField = new JTextField(35);
         passwordField = new JPasswordField(35);
@@ -77,6 +123,9 @@ public class AccountContent extends AbstractContent {
         rootPanel.add(passwordField,locator);
     }
 
+    /**
+     * The  method place the buttons on the main panel.
+     */
     private void placeButtons(){
         login = new JButton(LOGINNAME);
         logout=new JButton(LOGOUTNAME);
@@ -112,6 +161,9 @@ public class AccountContent extends AbstractContent {
         rootPanel.add(unmask,locator);
     }
 
+    /**
+     * The method set for the button clear click handler.
+     */
     private void setClearHandler(){
         clear.addActionListener(new ActionListener() {
             @Override
@@ -121,6 +173,9 @@ public class AccountContent extends AbstractContent {
         });
     }
 
+    /**
+     * The method set for the button unmask click handler.
+     */
     private void setUnmaskHandler(){
         unmask.addActionListener(new ActionListener() {
             @Override
@@ -135,16 +190,25 @@ public class AccountContent extends AbstractContent {
         });
     }
 
+    /**
+     * The method for set the mask of the password field.
+     */
     private void setMask(){
         passwordField.setEchoChar('*');
         unmask.setText(UNMASK);
     }
 
+    /**
+     * The method for set unmask of the password field.
+     */
     private void setUnmask(){
         passwordField.setEchoChar((char)0);
         unmask.setText("Mask");
     }
 
+    /**
+     * The method clear all the text fields on the panel.
+     */
     public void clear(){
         nameField.setText(EMPTYSTRING);
         passwordField.setText(EMPTYSTRING);
@@ -152,19 +216,36 @@ public class AccountContent extends AbstractContent {
         rootPanel.revalidate();
     }
 
+    /**
+     * The get method for user name field.
+     * @return string if the field filled and empty if not.
+     */
     public String getUserName(){
         return nameField.getText();
     }
 
+    /**
+     * The get method for password field
+     * @return string if the field filled and empty if not.
+     */
     public String getPass(){
         return new String(passwordField.getPassword());
     }
 
+    /**
+     * The method for set login state on the panel on field state.
+     * @param message the message in the state field
+     */
     public void setState(String message){
         state.setText(message);
         state.revalidate();
     }
 
+    /**
+     * The method for adding handlers on the buttons login, logout, register by the button name.
+     * @param listener the handler.
+     * @param buttonName the name of the target button.
+     */
     public void setAccountButtonListener(ActionListener listener, String buttonName){
         switch (buttonName){
             case REGISTERNAME : View.setButtonListener(register,listener); return;

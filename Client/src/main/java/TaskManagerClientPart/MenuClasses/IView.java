@@ -76,28 +76,75 @@ public interface IView {
      */
     void setDeleteListener(ActionListener listener);
 
+    /**
+     * The get method for server address field.
+     * @return the string if filled and the empty string if not.
+     */
     String getServerAddress();
 
+    /**
+     * The method for clearing server part of the interface.
+     */
     void clearServer();
 
+    /**
+     * The get method for port field.
+     * @return the string if filled and the empty string if not.
+     */
     String getPort();
 
+    /**
+     * The set method for server state field.
+     * @param message the string message on state.
+     */
     void setState(String message);
 
+    /**
+     * The get method for user name field.
+     * @return the string if filled and the empty string if not.
+     */
     String getUserName();
 
+    /**
+     * The get method for password field.
+     * @return the string if filled and the empty string if not.
+     */
     String getPass();
 
+    /**
+     * The method for clearing account part of the interface.
+     */
     void clearAccount();
 
+    /**
+     * The set method for account state field.
+     * @param message the string message on state.
+     */
     void setAccountState(String message);
 
+    /**
+     * The set method for handlers of account.
+     * @param listener the handler.
+     * @param buttonName the name of the button.
+     */
     void setAccountButtonListener(ActionListener listener, String buttonName);
 
+    /**
+     * The set method for handlers of server.
+     * @param listener the handler.
+     * @param buttonName the name of the button.
+     */
     void setServerButtonListener(ActionListener listener, String buttonName);
 
+    /**
+     * The clear method for task edition part.
+     */
     void clearTaskFields();
 
+    /**
+     * The method for showing info method to user/
+     * @param message the text message.
+     */
     void showInformMessage(String message);
 
 }

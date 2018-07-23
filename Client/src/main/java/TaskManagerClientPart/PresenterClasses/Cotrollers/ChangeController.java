@@ -14,20 +14,36 @@ import java.awt.event.ActionListener;
 import java.io.StringWriter;
 
 /**
- * The class, that control changing the tasks by user
+ * The class, that control changing the tasks by user.
  */
 public class ChangeController extends AbstractController{
+
+    /**
+     * The logger of the class.
+     */
     private static Logger logger = Logger.getLogger(ChangeController.class);
 
+    /**
+     * The classes constructor delegate object creating to parent class
+     * @param gui the UI.
+     * @param client the web part.
+     */
     public ChangeController(IView gui, WebClient client){
         super(gui,client);
     }
 
+    /**
+     * The method add the change handler to UI.
+     */
     @Override
     protected void init() {
         gui.setChangeListener(new ChangeListener());
     }
 
+    /**
+     * The method get the name of chose chosen task and the new info, send it to server and wait for the answer. If it
+     * is successful - clear the UI task`s fields, if no - send the message to UI.
+     */
     private void changing(){
         String chnaged = gui.getSelectedTask();
         TaskStringForm newTask = gui.getNewTask();
@@ -59,8 +75,8 @@ public class ChangeController extends AbstractController{
     private class ChangeListener implements ActionListener {
 
         /**
-         * The method that handle the event
-         * @param e The object of event
+         * The method that handle the event.
+         * @param e The object of event.
          * @see ChangeController#changing()
          */
         @Override

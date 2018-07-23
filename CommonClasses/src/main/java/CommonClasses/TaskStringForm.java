@@ -7,67 +7,153 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.GregorianCalendar;
 
+/**
+ * The class that perform the task class on the view level without opening realization on server.
+ */
 public class TaskStringForm {
+
+    /**
+     * The name of task.
+     */
     private String title;
+
+    /**
+     * The sign of active task.
+     */
     private boolean active;
+
+    /**
+     * The sign of repeat task.
+     */
     private boolean repeat;
+
+    /**
+     * The date of start task in string format.
+     */
     private String startDate;
+
+    /**
+     * The date of finish task in string format.
+     */
     private String endDate;
+
+    /**
+     * The number of repeated task`s interval in string format.
+     */
     private String interval;
+
+    /**
+     * The fields formats.
+     */
     public static final String FORMAT_TIME = "yyyy-mm-dd hh:mm:ss.msmsms",
             FORMAT_INTERVAL = "0 days 0 hours 0 minutes 0 seconds";
 
+    /**
+     * The default constructor.
+     */
     public TaskStringForm(){
     }
 
+    /**
+     * The get method for title field.
+     * @return the String or the null.
+     */
     public String getTitle() {
         return title;
     }
 
+    /**
+     * The set method for title field.
+     * @param title - the title for setting.
+     */
     public void setTitle(String title) {
         this.title = title;
     }
 
+    /**
+     * In fact the get method for active field;
+     * @return true or false.
+     */
     public boolean isActive() {
         return active;
     }
 
+    /**
+     * The set method for active field.
+     * @param active the mean of the field for setting.
+     */
     public void setActive(boolean active) {
         this.active = active;
     }
 
+    /**
+     * The get method for repeat field.
+     * @return the true or false.
+     */
     public boolean isRepeat() {
         return repeat;
     }
 
+    /**
+     * The set method for repeat field.
+     * @param repeat - the mean of the field.
+     */
     public void setRepeat(boolean repeat) {
         this.repeat = repeat;
     }
 
+    /**
+     * The get method for start field
+     * @return the string or the null;
+     */
     public String getStartDate() {
         return startDate;
     }
 
+    /**
+     * The set method for the start field.
+     * @param startDate - the setting mean
+     */
     public void setStartDate(String startDate) {
         this.startDate = startDate;
     }
 
+    /**
+     * The get method for end field.
+     * @return - String or the null.
+     */
     public String getEndDate() {
         return endDate;
     }
 
+    /**
+     * The set method for end field.
+     * @param endDate - the setting mean for field.
+     */
     public void setEndDate(String endDate) {
         this.endDate = endDate;
     }
 
+    /**
+     * The get method for interval field.
+     * @return String or null.
+     */
     public String getInterval() {
         return interval;
     }
 
+    /**
+     * The set method for interval field.
+     * @param interval the setting mean of the field.
+     */
     public void setInterval(String interval) {
         this.interval = interval;
     }
 
+    /**
+     * The override of the method from the Object for transforming the full task into the string.
+     * @return the String.
+     */
     @Override
     public String toString() {
         return title + " " +
@@ -76,6 +162,13 @@ public class TaskStringForm {
                 (!repeat?startDate:startDate+" " + endDate + " " + interval);
     }
 
+    /**
+     * The method parse the string form of task to task class.
+     * @see Task
+     * @return the Task object or the null if is not correct;
+     * @throws MyOwnException the common parent class of error that is thrown but really one of the child classes is
+     * thrown.
+     */
     public Task parseTask() throws MyOwnException{
         Task result = null;
         if(!repeat){

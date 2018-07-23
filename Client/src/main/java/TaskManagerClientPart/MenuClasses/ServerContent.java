@@ -5,20 +5,56 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+/**
+ * The child class of AbstractContent.
+ */
 public class ServerContent extends AbstractContent {
+
+    /**
+     * The address and port fields.
+     */
     private JTextField addressField, portField;
+
+    /**
+     * The buttons.
+     */
     private JButton connect, disconnect, clear;
-    public static final String CONNECTNAME="Connect";
-    public static final String DISCONNECTNAME="Disconnect";
+
+    /**
+     * The name of buttons.
+     */
+    public static final String CONNECTNAME="Connect",DISCONNECTNAME="Disconnect";
+
+    /**
+     * The IP format.
+     */
     public static final String ipv4Format = "xxx.xxx.xxx.xxx";
+
+    /**
+     * The default port.
+     */
     public static final String defaultPort = "2000";
+
+    /**
+     * The state of no connect.
+     */
     public static final String NOTCONNECTED = "Not connected";
+
+    /**
+     * The state field.
+     */
     private static JLabel state;
 
+    /**
+     * The default constructor delegate it to parent constructor.
+     */
     public ServerContent(){
         super();
     }
 
+    /**
+     * The method overrides the behaviour of the parent class of init elements.
+     */
     @Override
     protected void initElems() {
         rootPanel = PanelFactory.createPanel("Server");
@@ -28,6 +64,9 @@ public class ServerContent extends AbstractContent {
         locateButtons();
     }
 
+    /**
+     * The method init and place the labels.
+     */
     private void locateLabels(){
         GridBagConstraints locator = Constrains.getLocator();
         locator.weighty = 0.25;
@@ -39,6 +78,9 @@ public class ServerContent extends AbstractContent {
         rootPanel.add(new JLabel("CONNECTION STATE : "),locator);
     }
 
+    /**
+     * The method init and place the text fields.
+     */
     private void locateFields(){
         GridBagConstraints locator = Constrains.getLocator();
         locator.weighty=0.25;
@@ -55,6 +97,9 @@ public class ServerContent extends AbstractContent {
         rootPanel.add(state,locator);
     }
 
+    /**
+     * The method init and place the buttons.
+     */
     private void locateButtons(){
         GridBagConstraints locator = Constrains.getLocator();
         connect = new JButton("connect");
@@ -74,25 +119,43 @@ public class ServerContent extends AbstractContent {
         rootPanel.add(disconnect,locator);
     }
 
+    /**
+     * The get method for server address field.
+     * @return the string if the field id filled and the empty one if not.
+     */
     public String getServerAddress(){
         return addressField.getText();
     }
 
+    /**
+     * The get method for server port field.
+     * @return the string if the field id filled and the empty one if not.
+     */
     public String getPort(){
         return portField.getText();
     }
 
+    /**
+     * The method clear all text fields.
+     */
     public void clear(){
         addressField.setText(ipv4Format);
         portField.setText(defaultPort);
         rootPanel.revalidate();
     }
 
+    /**
+     * The method set the state of the connection to server.
+     * @param message
+     */
     public void setState(String message){
         state.setText(message);
         state.revalidate();
     }
 
+    /**
+     * The method set the handler for the button clear in this server part.
+     */
     private void setClearHandler(){
         clear.addActionListener(new ActionListener() {
             @Override
@@ -102,6 +165,11 @@ public class ServerContent extends AbstractContent {
         });
     }
 
+    /**
+     * The method set the handler for the buttons with the button name.
+     * @param listener the handler
+     * @param buttonName the button name for handler.
+     */
     public void setServerButtonListener(ActionListener listener, String buttonName){
         switch (buttonName){
             case CONNECTNAME : View.setButtonListener(connect,listener); return;

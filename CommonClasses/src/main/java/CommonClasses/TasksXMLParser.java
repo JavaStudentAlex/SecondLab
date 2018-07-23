@@ -13,15 +13,53 @@ import java.io.StringReader;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * The class for parsing tasks from xml format using SAX parser.
+ */
 public class TasksXMLParser extends DefaultHandler {
+    /**
+     * The name for tasks group tag.
+     */
     public static final String TASKS_GROUP_TAG_NAME = "tasks";
+
+    /**
+     * The name for old task tag.
+     */
     public static final String OLD_TASK_STRING = "old_task";
+
+    /**
+     * The name for task tag.
+     */
     public static final String TASK_TAG_NAME = "task";
+
+    /**
+     * The name for title field tag.
+     */
     public static final String TITLE_TAG_NAME="title";
+
+    /**
+     * The name for active field tag.
+     */
     public static final String ACTIVE_TAG_NAME="active";
+
+    /**
+     * The name for repeat field tag.
+     */
     public static final String REPEAT_TAG_NAME="repeat";
+
+    /**
+     * The name for start field tag.
+     */
     public static final String START_DATE_TAG_NAME = "start";
+
+    /**
+     * The name for end field tag.
+     */
     public static final String END_DATE_TAG_NAME = "end";
+
+    /**
+     * The name for interval field tag.
+     */
     public static final String INTERVAL_TAG_NAME= "interval";
     private String sourceXML;
     private String oldTask;
@@ -30,15 +68,34 @@ public class TasksXMLParser extends DefaultHandler {
     private boolean groupTask;
     private String curTag;
 
+    /**
+     * The method that create new object of the class with the xml source string and start init the parsing.
+     * @param sourceXML the xml string.
+     * @throws SAXException the error if the document not correct.
+     * @throws ParserConfigurationException if the configuration of parser incorrect.
+     * @throws IOException if the error in input stream.
+     */
     public TasksXMLParser(String sourceXML) throws SAXException, ParserConfigurationException,IOException{
         this.sourceXML = sourceXML;
         initParse();
     }
 
+    /**
+     * The method that parse.
+     * @throws SAXException the error if the document not correct.
+     * @throws ParserConfigurationException if the configuration of parser incorrect.
+     * @throws IOException if the error in input stream.
+     */
     private void initParse() throws SAXException, ParserConfigurationException, IOException{
         SAXParserFactory.newInstance().newSAXParser().parse(new InputSource(new StringReader(sourceXML)),this);
     }
 
+    /**
+     * The method that write the tasks in special format to writer.
+     * @param writer - the stream writer.
+     * @param tasks the list of the tasks in string form for writing.
+     * @throws XMLStreamException the error of writing in xml stream.
+     */
     public static void writeTasksByXML(XMLStreamWriter writer, List<TaskStringForm> tasks) throws XMLStreamException {
         writer.writeStartElement(TASKS_GROUP_TAG_NAME);
             for (TaskStringForm task : tasks){
@@ -47,6 +104,13 @@ public class TasksXMLParser extends DefaultHandler {
         writer.writeEndElement();
     }
 
+    /**
+     * The method that write the pair of tasks in string form - the old one and new one.
+     * @param writer the xml stream for writing.
+     * @param oldTask the old one.
+     * @param newTask the new one.
+     * @throws XMLStreamException the error of writing in xml stream.
+     */
     public static void writeOldNewTaskByXML(XMLStreamWriter writer, String oldTask,TaskStringForm newTask)
             throws XMLStreamException{
             writer.writeStartElement(TASKS_GROUP_TAG_NAME);
@@ -57,6 +121,12 @@ public class TasksXMLParser extends DefaultHandler {
             writer.writeEndElement();
     }
 
+    /**
+     * The method that write the old one task in string form.
+     * @param writer the xml stream for writing.
+     * @param oldTask the old one.
+     * @throws XMLStreamException the error of writing in xml stream.
+     */
     public static void writeOldTaskByXML(XMLStreamWriter writer, String oldTask)
             throws XMLStreamException{
         writer.writeStartElement(OLD_TASK_STRING);
@@ -64,6 +134,12 @@ public class TasksXMLParser extends DefaultHandler {
         writer.writeEndElement();
     }
 
+    /**
+     * The method that write the one task in string form.
+     * @param writer the xml stream for writing.
+     * @param task the task in string form.
+     * @throws XMLStreamException the error of writing in xml stream.
+     */
     public static void writeTaskByXML(XMLStreamWriter writer, TaskStringForm task) throws XMLStreamException{
         writer.writeStartElement(TASK_TAG_NAME);
         writer.writeStartElement(TITLE_TAG_NAME);
@@ -89,6 +165,14 @@ public class TasksXMLParser extends DefaultHandler {
         writer.writeEndElement();
     }
 
+    /**
+     * The method overrides from the parent class the behaviour with the start of the tag.
+     * @param uri The Namespace URI.
+     * @param localName The local name of namespace.
+     * @param qName The name of tag.
+     * @param attributes The attributes attached to the element.
+     * @throws SAXException the error of reading from xml stream.
+     */
     @Override
     public void startElement(String uri, String localName, String qName, Attributes attributes) throws SAXException {
         switch (qName){
@@ -101,6 +185,13 @@ public class TasksXMLParser extends DefaultHandler {
         curTag=qName;
     }
 
+    /**
+     * The method overrides from the parent class the behaviour with the end of the tag.
+     * @param uri The Namespace URI.
+     * @param localName The local name of namespace.
+     * @param qName The name of tag.
+     * @throws SAXException the error of reading from xml stream.
+     */
     @Override
     public void endElement(String uri, String localName, String qName) throws SAXException {
         if(qName.equals(TASK_TAG_NAME)&&groupTask&&oldTask==null){
@@ -121,6 +212,13 @@ public class TasksXMLParser extends DefaultHandler {
         curTag="";
     }
 
+    /**
+     * The method overrides from the parent class the behaviour with the characters into the tag space.
+     * @param ch - array of characters of the document.
+     * @param start - start of the target.
+     * @param length - end of the target , not included.
+     * @throws SAXException the error of reading from xml stream.
+     */
     @Override
     public void characters(char[] ch, int start, int length) throws SAXException {
         String result = new String(ch,start,length);
@@ -142,14 +240,26 @@ public class TasksXMLParser extends DefaultHandler {
         }
     }
 
+    /**
+     * The method is called after creating of object to get the old one task.
+     * @return string if there was the old task(tag) and null if not.
+     */
     public String getOldTask(){
         return oldTask;
     }
 
+    /**
+     * The method is called after creating of object to get the tasks.
+     * @return the list of tasks in string form if there was a group tasks tag and null if not.
+     */
     public List<TaskStringForm> getStringFormTasks(){
         return tasks==null?new ArrayList<TaskStringForm>():tasks;
     }
 
+    /**
+     * The method is called after creating of object to get the task.
+     * @return the tasks in the string form if the task tag was and null if not.
+     */
     public TaskStringForm getStringFormTask(){
         return curTask;
     }

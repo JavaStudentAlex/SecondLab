@@ -4,7 +4,7 @@ import TaskManagerClientPart.MenuClasses.IView;
 import TaskManagerClientPart.PresenterClasses.Cotrollers.*;
 
 /**
- * The class that control the behaviour of user interface and have some handlers of user's actions
+ * The class that control the behaviour of user interface and have some handlers of user's actions.
  */
 public class Presenter {
 

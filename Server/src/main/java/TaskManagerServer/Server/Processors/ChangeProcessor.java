@@ -10,15 +10,35 @@ import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.io.IOException;
 
+/**
+ * The processor controls the change of the task.
+ */
 public class ChangeProcessor extends AbstractProcessor {
 
+    /**
+     * The logger of the class.
+     */
     private static Logger logger = Logger.getLogger(ChangeProcessor.class);
 
+    /**
+     * The constructor get the link on the connection and set the name of the processor.
+     * @param handler the link to connection.
+     * @see Protocol
+     */
     public ChangeProcessor(ConnectionHandler handler){
         super(handler);
         process= Protocol.CHANGE;
     }
 
+    /**
+     * The method assert user name and login, get the xml pair old - new task, parse it to string title old task and
+     * string formatted task and than get the real new task object. In conclusion the task with the title of old task
+     * is removed from the local repository and the new task add and the OK status is sent by the output message. If
+     * something wrong  - the error message is sent by the output stream.
+     * @param reader the input stream.
+     * @param writer the output stream.
+     * @throws IOException the error is thrown where the stream is broken.
+     */
     @Override
     public void process(DataInputStream reader, DataOutputStream writer) throws IOException {
         String oldNewTaskXML = reader.readUTF();

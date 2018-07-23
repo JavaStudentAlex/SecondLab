@@ -9,13 +9,28 @@ import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.io.IOException;
 
+/**
+ * The processor controls the remove process.
+ */
 public class RemoveProcessor extends AbstractProcessor {
 
+    /**
+     * The method gets the link to connection thread and set the name of the process.
+     * @param handler the link to the connection thread.
+     * @see Protocol
+     */
     public RemoveProcessor(ConnectionHandler handler) {
         super(handler);
         process= Protocol.REMOVE;
     }
 
+    /**
+     * The method asserts the logging in, gets the title of the task, find it in the local repository and remove. After
+     * this the message is sent to the user. But if something is wrong - teh error message is sent by the output stream.
+     * @param reader the input stream.
+     * @param writer the output stream.
+     * @throws IOException the error is thrown where the stream breaks out.
+     */
     @Override
     public void process(DataInputStream reader, DataOutputStream writer) throws IOException {
         String oldTaskXML = reader.readUTF();

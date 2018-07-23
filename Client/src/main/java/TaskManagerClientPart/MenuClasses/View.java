@@ -14,6 +14,9 @@ import CommonClasses.TaskStringForm;
  */
 public class View implements IView{
 
+    /**
+     * The connection content of the interface that inclused server and account parts.
+     */
     private ConnectionContent connectionContent;
 
     /**
@@ -226,50 +229,112 @@ public class View implements IView{
         tasksContent.setDeleteListener(listener);
     }
 
+    /**
+     * The get method that delegate to connection content.
+     * @return the calling of the method in connection content.
+     * @see ConnectionContent#getServerAddress()
+     */
     public String getServerAddress(){
         return connectionContent.getServerAddress();
     }
 
+    /**
+     * The get method that delegate to connection content.
+     * @return the calling of the method in connection content.
+     * @see ConnectionContent#getPort()
+     */
     public String getPort(){
         return connectionContent.getPort();
     }
 
+    /**
+     * The get method that delegate to connection content.
+     * @see ConnectionContent#clearServerPart()
+     */
     public void clearServer(){
         connectionContent.clearServerPart();
     }
 
+    /**
+     * The set method that delegate to connection content.
+     * @param message the string message on state.
+     * @see ConnectionContent#setState(String)
+     */
     public void setState(String message){
         connectionContent.setState(message);
     }
 
+    /**
+     * The get method that delegate to connection content.
+     * @return the calling of the method in connection content.
+     * @see ConnectionContent#getUserName()
+     */
     public String getUserName(){
         return connectionContent.getUserName();
     }
 
+    /**
+     * The get method that delegate to connection content.
+     * @return the calling of the method in connection content.
+     * @see ConnectionContent#getPass()
+     */
     public String getPass(){
         return connectionContent.getPass();
     }
 
+    /**
+     * The get method that delegate to connection content.
+     * @see ConnectionContent#clearAccountPart()
+     */
     public void clearAccount(){
         connectionContent.clearAccountPart();
     }
 
+    /**
+     * The set method that delegate to connection content.
+     * @param message the string message on state.
+     * @see ConnectionContent#setAccountState(String)
+     */
     public void setAccountState(String message){
         connectionContent.setAccountState(message);
     }
 
+    /**
+     * The set static method for setting button listener handler.
+     * @param button the button
+     * @param listener the handler
+     */
     public static void setButtonListener(JButton button, ActionListener listener){
         button.addActionListener(listener);
     }
 
+    /**
+     * The set set method that delegate to ConnectionContent.
+     * @param listener the handler.
+     * @param buttonName the name of the button.
+     * @see ConnectionContent#setAccountButtonListener(ActionListener, String)
+     */
     public void setAccountButtonListener(ActionListener listener, String buttonName){
         connectionContent.setAccountButtonListener(listener,buttonName);
     }
 
+    /**
+     * The set method that delegate to ConnectionContent.
+     * @param listener the handler.
+     * @param buttonName the name of the button.
+     * @see
+     */
     public void setServerButtonListener(ActionListener listener, String buttonName){
         connectionContent.setServerButtonListener(listener,buttonName);
     }
 
+    /**
+     * The method assert is the value of string empty. If yes the error message is sent.
+     * @param val - the asserting value.
+     * @param nameInMessage The name of the filed for error message.
+     * @param panel the panel that control the error message.
+     * @return true if the value is not empty.
+     */
     public static boolean validate(String val, String nameInMessage, JPanel panel){
         if(val.isEmpty()){
             showErrorMessage(panel,"Fill please the "+nameInMessage+" field");
@@ -278,10 +343,19 @@ public class View implements IView{
         return true;
     }
 
+    /**
+     * The method delegate to task content.
+     * @see TasksContent#clearTaskFields()
+     */
     public void clearTaskFields(){
         tasksContent.clearTaskFields();
     }
 
+    /**
+     * The method to output the text messages about the error.
+     * @param message the text message.
+     * @see View#showErrorMessage(JPanel, String)
+     */
     public void showInformMessage(String message){
         JOptionPane.showInternalMessageDialog(rootPanel,message);
     }
