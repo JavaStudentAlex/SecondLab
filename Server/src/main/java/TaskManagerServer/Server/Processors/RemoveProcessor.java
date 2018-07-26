@@ -51,7 +51,7 @@ public class RemoveProcessor extends AbstractProcessor {
             SocketWorker.writeTheErrorByWriter(writer,"Server XMl error");
             return;
         }
-        handler.removeOldTask(oldTask);
+        handler.removeOldTask(oldTask, false);
         writer.writeBoolean(true);
         writer.flush();
     }

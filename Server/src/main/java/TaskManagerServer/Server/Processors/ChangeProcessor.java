@@ -74,7 +74,7 @@ public class ChangeProcessor extends AbstractProcessor {
             SocketWorker.writeTheErrorByWriter(writer,e.getMessage());
             return;
         }
-        handler.removeOldTask(oldTask);
+        handler.removeOldTask(oldTask, true);
         handler.addNewTask(newTask);
         writer.writeBoolean(true);
         writer.flush();

@@ -349,14 +349,18 @@ public class ConnectionHandler extends Thread {
      */
     public void addNewTask(Task task){
         tasks.put(task.getTitle(),task);
+        writeTasksToCurFile(getCurrentTasksStringList());
     }
 
     /**
      * The method remove the task by the title.
      * @param oldTaskTitle the title of the chosen task.
      */
-    public void removeOldTask(String oldTaskTitle){
+    public void removeOldTask(String oldTaskTitle, boolean isChange){
         tasks.remove(oldTaskTitle);
+        if(!isChange){
+            writeTasksToCurFile(getCurrentTasksStringList());
+        }
     }
 
     /**
