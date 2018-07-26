@@ -150,7 +150,7 @@ public class UsersXMLParser extends DefaultHandler {
                 }
             writer.writeEndElement();
         } catch (XMLStreamException e) {
-            throw new IOException();
+            throw new IOException(e);
         } catch (FileNotFoundException e) {
             logger.warn("File not found, create new");
             usersFile.delete();
