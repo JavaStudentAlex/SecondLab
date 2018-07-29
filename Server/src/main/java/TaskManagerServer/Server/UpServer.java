@@ -1,7 +1,9 @@
 package TaskManagerServer.Server;
 
+import TaskManagerServer.Server.MenuClasses.ServerMenu;
+
 public class UpServer {
     public static void main(String[] args){
-        Server server = new Server();
+        ServerMenu gui = new ServerMenu();
     }
 }

@@ -67,6 +67,7 @@ public class UsersXMLParser extends DefaultHandler {
             usersFile.createNewFile();
         }
         else {
+            if(file.length()==0){return;}
             try {
                 SAXParserFactory.newInstance().newSAXParser().parse(usersFile,this);
             } catch (SAXException | ParserConfigurationException e) {

@@ -1,5 +1,6 @@
 package TaskManagerClientPart.MenuClasses;
 
+import CommonClasses.Constrains;
 import CommonClasses.TaskStringForm;
 import javax.swing.*;
 import java.awt.*;

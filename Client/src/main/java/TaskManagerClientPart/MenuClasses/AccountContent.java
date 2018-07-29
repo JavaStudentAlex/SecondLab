@@ -1,5 +1,7 @@
 package TaskManagerClientPart.MenuClasses;
 
+import CommonClasses.Constrains;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;

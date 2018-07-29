@@ -8,6 +8,7 @@ import java.awt.event.ActionListener;
 import java.awt.event.WindowAdapter;
 import java.util.List;
 import CommonClasses.TaskStringForm;
+import CommonClasses.FramesFactory;
 
 /**
  * The main container class for user interface
@@ -58,28 +59,13 @@ public class View implements IView{
     }
 
     /**
-     * The method create a visible but empty window with special attributes
-     * @return the {@code JFrame} instance
-     */
-    public static JFrame getFrame(){ // creating frame method
-        JFrame window = new JFrame(){};
-        window.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        window.setTitle("Demo API");
-        Toolkit thisToolkit = Toolkit.getDefaultToolkit();
-        Dimension size = thisToolkit.getScreenSize();
-        window.setBounds((int)(size.width*0.3),(int)(size.height*0.2),(int)(size.width*0.4),(int)(size.height*0.6));
-        window.setVisible(true);
-        return window;
-    }
-
-    /**
      * The method that creates and initializes all elements(also menus) in the class. This method places also
      * all elements on the main panel.
      * @return the initialized and filled {@code JFrame} instance
      * @see TasksContent
      */
     private JFrame getWindow() {
-        JFrame result = getFrame();//create frame
+        JFrame result = FramesFactory.getFrame();//create frame
 
         rootPanel = new JPanel();// navigation
         panels = new CardLayout();

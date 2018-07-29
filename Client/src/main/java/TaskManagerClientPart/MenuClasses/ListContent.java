@@ -1,5 +1,7 @@
 package TaskManagerClientPart.MenuClasses;
 
+import CommonClasses.Constrains;
+
 import javax.swing.*;
 import javax.swing.event.ListSelectionListener;
 import java.awt.*;

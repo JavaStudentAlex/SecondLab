@@ -10,7 +10,7 @@ import org.apache.log4j.Logger;
 /**
  * The class that represent the server work, save the user info, it`s directories , connection threads.
  */
-public class Server {
+public class Server  extends Thread{
 
     /**
      * The logger of the class.
@@ -20,12 +20,12 @@ public class Server {
     /**
      * The main dir.
      */
-    public static final String MAIN_DIR = "Server";
+    public static final String MAIN_DIR = "ServerDir";
 
     /**
      * The dir for the users info.
      */
-    public static final String USER_DIR = "Users";
+    public static final String USER_DIR = "UsersDir";
 
     /**
      * The name of the tasks xml file in every user directory.
@@ -92,7 +92,15 @@ public class Server {
             logger.warn("Can not write/read directories");
             return;
         }
+        start();
+    }
 
+    /**
+     * The method listen to the port and catch the connections. Than get the connection, push it to the repo in use and
+     * than the connection handler do the work himself.
+     */
+    @Override
+    public void run() {
         try {
             listener = new ServerSocket(2000);
             logger.info("Server start working at " + listener.getLocalSocketAddress());
@@ -219,5 +227,30 @@ public class Server {
                 userTasksTemp.createNewFile();
             }
         }
+    }
+
+    /**
+     * The get method for the port from the listen socket.
+     * @return the in value of the port.
+     */
+    public int getPort(){
+        return listener.getLocalPort();
+    }
+
+    /**
+     * The method for closing the server and clear all his resources.
+     */
+    public void clearServer(){
+        for(ConnectionHandler handler : inUse){
+            handler.clearThisThread();
+        }
+        inUse.clear();
+        pool.clear();
+        try {
+            listener.close();
+        } catch (IOException e) {
+            logger.info("Error with closing the server.");
+        }
+        this.interrupt();
     }
 }

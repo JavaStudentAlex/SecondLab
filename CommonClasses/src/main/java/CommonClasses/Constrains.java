@@ -1,4 +1,4 @@
-package TaskManagerClientPart.MenuClasses;
+package CommonClasses;
 
 import java.awt.*;
 

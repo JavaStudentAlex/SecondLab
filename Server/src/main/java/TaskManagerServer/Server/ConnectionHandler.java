@@ -127,16 +127,9 @@ public class ConnectionHandler extends Thread {
     /**
      * The method stop this own thread and close the connection.
      */
-    public void stopThis(){
+    public synchronized void stopThis(){
         server.removeThread(this);
-        try {
-            if (connection!=null){
-                connection.close();
-            }
-        } catch (IOException e) {
-            logger.info("Could not close connection by stopping");
-        }
-        this.interrupt();
+        clearThisThread();
     }
 
     /**
@@ -338,6 +331,7 @@ public class ConnectionHandler extends Thread {
             XMLStreamWriter writer = XMLOutputFactory.newFactory().
                     createXMLStreamWriter(new FileOutputStream(currentDir+File.separator+Server.USER_FILE));
             TasksXMLParser.writeTasksByXML(writer,tasksStringList);
+            System.out.println("Writing new task to " + currentDir+File.separator+Server.USER_FILE);
         } catch (XMLStreamException | FileNotFoundException e) {
             logger.info("Should not be because directories asserted");
         }
@@ -370,5 +364,19 @@ public class ConnectionHandler extends Thread {
      */
     public boolean isLogged(String user){
         return server.isLogged(user);
+    }
+
+    /**
+     * The method for clearing the threads of the user. It stops the connection to client.
+     */
+    public synchronized  void clearThisThread(){
+        try {
+            if (connection!=null){
+                connection.close();
+            }
+        } catch (IOException e) {
+            logger.info("Could not close connection by stopping");
+        }
+        this.interrupt();
     }
 }
